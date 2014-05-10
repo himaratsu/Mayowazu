@@ -21,6 +21,10 @@
 		201391D3191DFBC200749FE3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201391B5191DFBC200749FE3 /* UIKit.framework */; };
 		201391DB191DFBC200749FE3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 201391D9191DFBC200749FE3 /* InfoPlist.strings */; };
 		201391DD191DFBC200749FE3 /* MayowazuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 201391DC191DFBC200749FE3 /* MayowazuTests.m */; };
+		204975EC191E18B9000324D1 /* MYWShopInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 204975EB191E18B9000324D1 /* MYWShopInfo.m */; };
+		204975EF191E1940000324D1 /* MYWHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 204975EE191E1940000324D1 /* MYWHistoryManager.m */; };
+		204975F2191E1D1C000324D1 /* MYWHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 204975F1191E1D1C000324D1 /* MYWHistoryViewController.m */; };
+		204975F5191E1E15000324D1 /* MYWHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204975F4191E1E15000324D1 /* MYWHistoryCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,14 @@
 		201391D8191DFBC200749FE3 /* MayowazuTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MayowazuTests-Info.plist"; sourceTree = "<group>"; };
 		201391DA191DFBC200749FE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		201391DC191DFBC200749FE3 /* MayowazuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MayowazuTests.m; sourceTree = "<group>"; };
+		204975EA191E18B9000324D1 /* MYWShopInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYWShopInfo.h; sourceTree = "<group>"; };
+		204975EB191E18B9000324D1 /* MYWShopInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYWShopInfo.m; sourceTree = "<group>"; };
+		204975ED191E1940000324D1 /* MYWHistoryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYWHistoryManager.h; sourceTree = "<group>"; };
+		204975EE191E1940000324D1 /* MYWHistoryManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYWHistoryManager.m; sourceTree = "<group>"; };
+		204975F0191E1D1C000324D1 /* MYWHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYWHistoryViewController.h; sourceTree = "<group>"; };
+		204975F1191E1D1C000324D1 /* MYWHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYWHistoryViewController.m; sourceTree = "<group>"; };
+		204975F3191E1E15000324D1 /* MYWHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYWHistoryCell.h; sourceTree = "<group>"; };
+		204975F4191E1E15000324D1 /* MYWHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYWHistoryCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,8 +129,16 @@
 				201391C3191DFBC200749FE3 /* Main.storyboard */,
 				201391C6191DFBC200749FE3 /* MYWViewController.h */,
 				201391C7191DFBC200749FE3 /* MYWViewController.m */,
+				204975F0191E1D1C000324D1 /* MYWHistoryViewController.h */,
+				204975F1191E1D1C000324D1 /* MYWHistoryViewController.m */,
 				201391C9191DFBC200749FE3 /* Images.xcassets */,
 				201391B8191DFBC200749FE3 /* Supporting Files */,
+				204975EA191E18B9000324D1 /* MYWShopInfo.h */,
+				204975EB191E18B9000324D1 /* MYWShopInfo.m */,
+				204975ED191E1940000324D1 /* MYWHistoryManager.h */,
+				204975EE191E1940000324D1 /* MYWHistoryManager.m */,
+				204975F3191E1E15000324D1 /* MYWHistoryCell.h */,
+				204975F4191E1E15000324D1 /* MYWHistoryCell.m */,
 			);
 			path = Mayowazu;
 			sourceTree = "<group>";
@@ -252,7 +272,11 @@
 			files = (
 				201391C2191DFBC200749FE3 /* MYWAppDelegate.m in Sources */,
 				201391C8191DFBC200749FE3 /* MYWViewController.m in Sources */,
+				204975F5191E1E15000324D1 /* MYWHistoryCell.m in Sources */,
 				201391BE191DFBC200749FE3 /* main.m in Sources */,
+				204975F2191E1D1C000324D1 /* MYWHistoryViewController.m in Sources */,
+				204975EC191E18B9000324D1 /* MYWShopInfo.m in Sources */,
+				204975EF191E1940000324D1 /* MYWHistoryManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -457,6 +481,7 @@
 				201391E2191DFBC200749FE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		201391E3191DFBC200749FE3 /* Build configuration list for PBXNativeTarget "MayowazuTests" */ = {
 			isa = XCConfigurationList;
@@ -465,6 +490,7 @@
 				201391E5191DFBC200749FE3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

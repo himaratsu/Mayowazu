@@ -18,17 +18,30 @@
 // --------------------------------------------------------------------------------
 
 
+// --------------------------------------------------------------------------------
+// 作りたい機能
+//  - アプリ起動時にペーストボードをチェックする（食べログ / ぐるなび ならAlertで訪ねる）
+//  - 履歴（オフラインキャッシュ）
+//  - お店の情報を色々ととる（WebViewで詳細に飛べる）
+//  - デザイン入れる
+//  - 
+// --------------------------------------------------------------------------------
+
+
 
 #import "MYWViewController.h"
+#import "MYWHistoryManager.h"
+#import "MYWShopInfo.h"
 
 @interface MYWViewController ()
-<UIWebViewDelegate>
+<UIWebViewDelegate, UIAlertViewDelegate>
 
 @property (nonatomic) UIWebView *webView;
 
 @property (weak, nonatomic) IBOutlet UITextField *siteUrlTextField;
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField;
-@property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;
+@property (weak, nonatomic) IBOutlet UITextField *shopNameField;
+
 
 @end
 
@@ -41,6 +54,34 @@
 	
     // TODO: あとでけす
     _siteUrlTextField.text = @"http://r.gnavi.co.jp/bfevk1410000";
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self checkPasteBoard];
+}
+
+// Pasteboardをチェックして
+- (void)checkPasteBoard {
+    UIPasteboard *board = [UIPasteboard generalPasteboard];
+    NSString *string = [board valueForPasteboardType:@"public.text"];
+
+    // パターンにマッチすれば提案を出す
+    NSString *host = [[NSURL URLWithString:string] host];
+    if ([host isEqualToString:@"tabelog.com"]
+        || [host isEqualToString:@"s.tabelog.com"]
+        || [host isEqualToString:@"r.gnavi.co.jp"]) {
+        
+        // TODO: bottomからviewが出てくるタイプにする
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"コピーしているURLから検索しますか？"
+                                                        message:string
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:@"OK", nil];
+        [alert show];
+    }
     
 }
 
@@ -63,18 +104,30 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    _shopNameLabel.text = title;
+    _shopNameField.text = title;
     
     NSString *host = webView.request.URL.host;
 
     if ([host isEqualToString:@"tabelog.com"]
         || [host isEqualToString:@"s.tabelog.com"]) {
         // 食べログなら
-        _addressTextField.text = [self searchAddressForTabelog];
+        NSString *address = [self searchAddressForTabelog];
+        _addressTextField.text = address;
+        
+        MYWShopInfo *shopInfo = [[MYWShopInfo alloc] initWithUrl:webView.request.URL.absoluteString
+                                                           title:title
+                                                         address:address];
+        [[[MYWHistoryManager alloc] init] saveToHistory:shopInfo];
     }
     else if ([host isEqualToString:@"r.gnavi.co.jp"]) {
         // ぐるなびなら
-        _addressTextField.text = [self searchAddressForGurunavi];
+        NSString *address = [self searchAddressForGurunavi];
+        _addressTextField.text = address;
+        
+        MYWShopInfo *shopInfo = [[MYWShopInfo alloc] initWithUrl:webView.request.URL.absoluteString
+                                                           title:title
+                                                         address:address];
+        [[[MYWHistoryManager alloc] init] saveToHistory:shopInfo];
     }
     else {
         // どちらでもないなら
@@ -89,6 +142,19 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"読み込みエラー[%@]", error);
+}
+
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        UIPasteboard *board = [UIPasteboard generalPasteboard];
+        NSString *string = [board valueForPasteboardType:@"public.text"];
+        
+        _siteUrlTextField.text = string;
+        [self loadWebPageWithUrl:_siteUrlTextField.text];
+    }
 }
 
 
@@ -109,6 +175,7 @@
 }
 
 - (void)openUrl:(NSString *)url {
+    NSLog(@"open url[%@]", url);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
