@@ -1,0 +1,472 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		201391B2191DFBC200749FE3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201391B1191DFBC200749FE3 /* Foundation.framework */; };
+		201391B4191DFBC200749FE3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201391B3191DFBC200749FE3 /* CoreGraphics.framework */; };
+		201391B6191DFBC200749FE3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201391B5191DFBC200749FE3 /* UIKit.framework */; };
+		201391BC191DFBC200749FE3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 201391BA191DFBC200749FE3 /* InfoPlist.strings */; };
+		201391BE191DFBC200749FE3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 201391BD191DFBC200749FE3 /* main.m */; };
+		201391C2191DFBC200749FE3 /* MYWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 201391C1191DFBC200749FE3 /* MYWAppDelegate.m */; };
+		201391C5191DFBC200749FE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 201391C3191DFBC200749FE3 /* Main.storyboard */; };
+		201391C8191DFBC200749FE3 /* MYWViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 201391C7191DFBC200749FE3 /* MYWViewController.m */; };
+		201391CA191DFBC200749FE3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 201391C9191DFBC200749FE3 /* Images.xcassets */; };
+		201391D1191DFBC200749FE3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201391D0191DFBC200749FE3 /* XCTest.framework */; };
+		201391D2191DFBC200749FE3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201391B1191DFBC200749FE3 /* Foundation.framework */; };
+		201391D3191DFBC200749FE3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201391B5191DFBC200749FE3 /* UIKit.framework */; };
+		201391DB191DFBC200749FE3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 201391D9191DFBC200749FE3 /* InfoPlist.strings */; };
+		201391DD191DFBC200749FE3 /* MayowazuTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 201391DC191DFBC200749FE3 /* MayowazuTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		201391D4191DFBC200749FE3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 201391A6191DFBC200749FE3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 201391AD191DFBC200749FE3;
+			remoteInfo = Mayowazu;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		201391AE191DFBC200749FE3 /* Mayowazu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mayowazu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		201391B1191DFBC200749FE3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		201391B3191DFBC200749FE3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		201391B5191DFBC200749FE3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		201391B9191DFBC200749FE3 /* Mayowazu-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mayowazu-Info.plist"; sourceTree = "<group>"; };
+		201391BB191DFBC200749FE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		201391BD191DFBC200749FE3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		201391BF191DFBC200749FE3 /* Mayowazu-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mayowazu-Prefix.pch"; sourceTree = "<group>"; };
+		201391C0191DFBC200749FE3 /* MYWAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYWAppDelegate.h; sourceTree = "<group>"; };
+		201391C1191DFBC200749FE3 /* MYWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYWAppDelegate.m; sourceTree = "<group>"; };
+		201391C4191DFBC200749FE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		201391C6191DFBC200749FE3 /* MYWViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MYWViewController.h; sourceTree = "<group>"; };
+		201391C7191DFBC200749FE3 /* MYWViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MYWViewController.m; sourceTree = "<group>"; };
+		201391C9191DFBC200749FE3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		201391CF191DFBC200749FE3 /* MayowazuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MayowazuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		201391D0191DFBC200749FE3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		201391D8191DFBC200749FE3 /* MayowazuTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MayowazuTests-Info.plist"; sourceTree = "<group>"; };
+		201391DA191DFBC200749FE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		201391DC191DFBC200749FE3 /* MayowazuTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MayowazuTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		201391AB191DFBC200749FE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				201391B4191DFBC200749FE3 /* CoreGraphics.framework in Frameworks */,
+				201391B6191DFBC200749FE3 /* UIKit.framework in Frameworks */,
+				201391B2191DFBC200749FE3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		201391CC191DFBC200749FE3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				201391D1191DFBC200749FE3 /* XCTest.framework in Frameworks */,
+				201391D3191DFBC200749FE3 /* UIKit.framework in Frameworks */,
+				201391D2191DFBC200749FE3 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		201391A5191DFBC200749FE3 = {
+			isa = PBXGroup;
+			children = (
+				201391B7191DFBC200749FE3 /* Mayowazu */,
+				201391D6191DFBC200749FE3 /* MayowazuTests */,
+				201391B0191DFBC200749FE3 /* Frameworks */,
+				201391AF191DFBC200749FE3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		201391AF191DFBC200749FE3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				201391AE191DFBC200749FE3 /* Mayowazu.app */,
+				201391CF191DFBC200749FE3 /* MayowazuTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		201391B0191DFBC200749FE3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				201391B1191DFBC200749FE3 /* Foundation.framework */,
+				201391B3191DFBC200749FE3 /* CoreGraphics.framework */,
+				201391B5191DFBC200749FE3 /* UIKit.framework */,
+				201391D0191DFBC200749FE3 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		201391B7191DFBC200749FE3 /* Mayowazu */ = {
+			isa = PBXGroup;
+			children = (
+				201391C0191DFBC200749FE3 /* MYWAppDelegate.h */,
+				201391C1191DFBC200749FE3 /* MYWAppDelegate.m */,
+				201391C3191DFBC200749FE3 /* Main.storyboard */,
+				201391C6191DFBC200749FE3 /* MYWViewController.h */,
+				201391C7191DFBC200749FE3 /* MYWViewController.m */,
+				201391C9191DFBC200749FE3 /* Images.xcassets */,
+				201391B8191DFBC200749FE3 /* Supporting Files */,
+			);
+			path = Mayowazu;
+			sourceTree = "<group>";
+		};
+		201391B8191DFBC200749FE3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				201391B9191DFBC200749FE3 /* Mayowazu-Info.plist */,
+				201391BA191DFBC200749FE3 /* InfoPlist.strings */,
+				201391BD191DFBC200749FE3 /* main.m */,
+				201391BF191DFBC200749FE3 /* Mayowazu-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		201391D6191DFBC200749FE3 /* MayowazuTests */ = {
+			isa = PBXGroup;
+			children = (
+				201391DC191DFBC200749FE3 /* MayowazuTests.m */,
+				201391D7191DFBC200749FE3 /* Supporting Files */,
+			);
+			path = MayowazuTests;
+			sourceTree = "<group>";
+		};
+		201391D7191DFBC200749FE3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				201391D8191DFBC200749FE3 /* MayowazuTests-Info.plist */,
+				201391D9191DFBC200749FE3 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		201391AD191DFBC200749FE3 /* Mayowazu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 201391E0191DFBC200749FE3 /* Build configuration list for PBXNativeTarget "Mayowazu" */;
+			buildPhases = (
+				201391AA191DFBC200749FE3 /* Sources */,
+				201391AB191DFBC200749FE3 /* Frameworks */,
+				201391AC191DFBC200749FE3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Mayowazu;
+			productName = Mayowazu;
+			productReference = 201391AE191DFBC200749FE3 /* Mayowazu.app */;
+			productType = "com.apple.product-type.application";
+		};
+		201391CE191DFBC200749FE3 /* MayowazuTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 201391E3191DFBC200749FE3 /* Build configuration list for PBXNativeTarget "MayowazuTests" */;
+			buildPhases = (
+				201391CB191DFBC200749FE3 /* Sources */,
+				201391CC191DFBC200749FE3 /* Frameworks */,
+				201391CD191DFBC200749FE3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				201391D5191DFBC200749FE3 /* PBXTargetDependency */,
+			);
+			name = MayowazuTests;
+			productName = MayowazuTests;
+			productReference = 201391CF191DFBC200749FE3 /* MayowazuTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		201391A6191DFBC200749FE3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MYW;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = himara2;
+				TargetAttributes = {
+					201391CE191DFBC200749FE3 = {
+						TestTargetID = 201391AD191DFBC200749FE3;
+					};
+				};
+			};
+			buildConfigurationList = 201391A9191DFBC200749FE3 /* Build configuration list for PBXProject "Mayowazu" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 201391A5191DFBC200749FE3;
+			productRefGroup = 201391AF191DFBC200749FE3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				201391AD191DFBC200749FE3 /* Mayowazu */,
+				201391CE191DFBC200749FE3 /* MayowazuTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		201391AC191DFBC200749FE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				201391CA191DFBC200749FE3 /* Images.xcassets in Resources */,
+				201391BC191DFBC200749FE3 /* InfoPlist.strings in Resources */,
+				201391C5191DFBC200749FE3 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		201391CD191DFBC200749FE3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				201391DB191DFBC200749FE3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		201391AA191DFBC200749FE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				201391C2191DFBC200749FE3 /* MYWAppDelegate.m in Sources */,
+				201391C8191DFBC200749FE3 /* MYWViewController.m in Sources */,
+				201391BE191DFBC200749FE3 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		201391CB191DFBC200749FE3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				201391DD191DFBC200749FE3 /* MayowazuTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		201391D5191DFBC200749FE3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 201391AD191DFBC200749FE3 /* Mayowazu */;
+			targetProxy = 201391D4191DFBC200749FE3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		201391BA191DFBC200749FE3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				201391BB191DFBC200749FE3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		201391C3191DFBC200749FE3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				201391C4191DFBC200749FE3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		201391D9191DFBC200749FE3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				201391DA191DFBC200749FE3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		201391DE191DFBC200749FE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		201391DF191DFBC200749FE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		201391E1191DFBC200749FE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mayowazu/Mayowazu-Prefix.pch";
+				INFOPLIST_FILE = "Mayowazu/Mayowazu-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		201391E2191DFBC200749FE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mayowazu/Mayowazu-Prefix.pch";
+				INFOPLIST_FILE = "Mayowazu/Mayowazu-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		201391E4191DFBC200749FE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Mayowazu.app/Mayowazu";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mayowazu/Mayowazu-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MayowazuTests/MayowazuTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		201391E5191DFBC200749FE3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Mayowazu.app/Mayowazu";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Mayowazu/Mayowazu-Prefix.pch";
+				INFOPLIST_FILE = "MayowazuTests/MayowazuTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		201391A9191DFBC200749FE3 /* Build configuration list for PBXProject "Mayowazu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				201391DE191DFBC200749FE3 /* Debug */,
+				201391DF191DFBC200749FE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		201391E0191DFBC200749FE3 /* Build configuration list for PBXNativeTarget "Mayowazu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				201391E1191DFBC200749FE3 /* Debug */,
+				201391E2191DFBC200749FE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		201391E3191DFBC200749FE3 /* Build configuration list for PBXNativeTarget "MayowazuTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				201391E4191DFBC200749FE3 /* Debug */,
+				201391E5191DFBC200749FE3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 201391A6191DFBC200749FE3 /* Project object */;
+}
