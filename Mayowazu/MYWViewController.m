@@ -23,6 +23,7 @@
 //  - お店の情報を色々ととる（WebViewで詳細に飛べるとか）
 //  - デザイン入れる
 //  - 住所欄はUITextViewにして複数行対応
+//  - エラー処理は、タイトルをみて判断
 //
 // --------------------------------------------------------------------------------
 
@@ -33,7 +34,7 @@
 #import "MYWShopInfo.h"
 
 @interface MYWViewController ()
-<UIWebViewDelegate, UIAlertViewDelegate>
+<UIWebViewDelegate, UIAlertViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic) UIWebView *webView;
 
@@ -52,7 +53,7 @@
     [super viewDidLoad];
 	
     // TODO: あとでけす
-    _siteUrlTextField.text = @"http://r.gnavi.co.jp/bfevk1410000";
+    _siteUrlTextField.text = @"http://tabelog.com/hyogo/A2805/A280501/28001454/";
     
 }
 
@@ -85,6 +86,17 @@
 }
 
 - (void)loadWebPageWithUrl:(NSString *)url {
+    // validate
+    if (url == nil || [url isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー"
+                                                        message:@"URLを入力してください"
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"OK", nil];
+        [alert show];
+        return;
+    }
+    
     if (!_webView) {
         self.webView = [[UIWebView alloc] init];
         _webView.delegate = self;
@@ -109,6 +121,17 @@
 
     if ([host isEqualToString:@"tabelog.com"]
         || [host isEqualToString:@"s.tabelog.com"]) {
+        // エラーハンドリング
+        if ([webView.request.URL.absoluteString isEqualToString:@"http://s.tabelog.com/2800145/"]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"食べログ エラー"
+                                                            message:@"該当するお店を見つけられませんでした。URLが正しいかを確認してください"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"OK", nil];
+            [alert show];
+            return;
+        }
+        
         // 食べログなら
         NSString *address = [self searchAddressForTabelog];
         _addressTextField.text = address;
@@ -118,7 +141,19 @@
                                                          address:address];
         [[[MYWHistoryManager alloc] init] saveToHistory:shopInfo];
     }
-    else if ([host isEqualToString:@"r.gnavi.co.jp"]) {
+    else if ([host isEqualToString:@"r.gnavi.co.jp"]
+             || [host isEqualToString:@"mobile.gnavi.co.jp"]) {
+        // エラーハンドリング
+        if ([webView.request.URL.absoluteString isEqualToString:@"http://mobile.gnavi.co.jp/iphone/gnrl/gt-error/"]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ぐるなび エラー"
+                                                            message:@"該当するお店を見つけられませんでした。URLが正しいかを確認してください"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"OK", nil];
+            [alert show];
+            return;
+        }
+        
         // ぐるなびなら
         NSString *address = [self searchAddressForGurunavi];
         _addressTextField.text = address;
@@ -141,6 +176,16 @@
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"読み込みエラー[%@]", error);
+    
+    if (error.code == 102) {
+        // 読み込めないURL
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー"
+                                                        message:@"有効なURLを入力してください"
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"OK", nil];
+        [alert show];
+    }
 }
 
 
@@ -160,16 +205,31 @@
 #pragma mark - IBAction
 
 - (IBAction)searchBtnTouched:(id)sender {
+    // キーボードを閉じる
+    [_siteUrlTextField resignFirstResponder];
+    [_shopNameField resignFirstResponder];
+    
     [self loadWebPageWithUrl:_siteUrlTextField.text];
 }
 
+- (NSString *)getEscapedString {
+    NSString *query = _addressTextField.text;
+    NSString *escapedString = (NSString*)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                                   kCFAllocatorDefault,
+                                                                                                   (CFStringRef)query,
+                                                                                                   NULL,
+                                                                                                   (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                   kCFStringEncodingUTF8));
+    return escapedString;
+}
+
 - (IBAction)openiOSMapBtnTouched:(id)sender {
-    NSString *url = [NSString stringWithFormat:@"http://maps.apple.com/maps?q=%@", _addressTextField.text];
+    NSString *url = [NSString stringWithFormat:@"http://maps.apple.com/maps?q=%@", [self getEscapedString]];
     [self openUrl:url];
 }
 
 - (IBAction)openGoogleMapBtnTouched:(id)sender {
-    NSString *url = [NSString stringWithFormat:@"comgooglemaps://?q=%@", _addressTextField.text];
+    NSString *url = [NSString stringWithFormat:@"comgooglemaps://?q=%@", [self getEscapedString]];
     [self openUrl:url];
 }
 
@@ -196,6 +256,17 @@
     return [_webView stringByEvaluatingJavaScriptFromString:jsStr];
 }
 
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    if (textField == _siteUrlTextField) {
+        [self loadWebPageWithUrl:_siteUrlTextField.text];
+    }
+    return YES;
+}
 
 
 @end
