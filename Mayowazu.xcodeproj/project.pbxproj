@@ -25,6 +25,8 @@
 		204975EF191E1940000324D1 /* MYWHistoryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 204975EE191E1940000324D1 /* MYWHistoryManager.m */; };
 		204975F2191E1D1C000324D1 /* MYWHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 204975F1191E1D1C000324D1 /* MYWHistoryViewController.m */; };
 		204975F5191E1E15000324D1 /* MYWHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204975F4191E1E15000324D1 /* MYWHistoryCell.m */; };
+		8AB303E812C645949BB6242E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1961A229F3E4300A551BBD8 /* libPods.a */; };
+		D9B891AE192376A400D84592 /* icon1024.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B891AD192376A400D84592 /* icon1024.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,9 @@
 		204975F1191E1D1C000324D1 /* MYWHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYWHistoryViewController.m; sourceTree = "<group>"; };
 		204975F3191E1E15000324D1 /* MYWHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYWHistoryCell.h; sourceTree = "<group>"; };
 		204975F4191E1E15000324D1 /* MYWHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYWHistoryCell.m; sourceTree = "<group>"; };
+		58A7E3B5AE754B2BBD2E11E5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		D9B891AD192376A400D84592 /* icon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1024.png; sourceTree = "<group>"; };
+		E1961A229F3E4300A551BBD8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +80,7 @@
 				201391B4191DFBC200749FE3 /* CoreGraphics.framework in Frameworks */,
 				201391B6191DFBC200749FE3 /* UIKit.framework in Frameworks */,
 				201391B2191DFBC200749FE3 /* Foundation.framework in Frameworks */,
+				8AB303E812C645949BB6242E /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +104,7 @@
 				201391D6191DFBC200749FE3 /* MayowazuTests */,
 				201391B0191DFBC200749FE3 /* Frameworks */,
 				201391AF191DFBC200749FE3 /* Products */,
+				58A7E3B5AE754B2BBD2E11E5 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,6 +124,7 @@
 				201391B3191DFBC200749FE3 /* CoreGraphics.framework */,
 				201391B5191DFBC200749FE3 /* UIKit.framework */,
 				201391D0191DFBC200749FE3 /* XCTest.framework */,
+				E1961A229F3E4300A551BBD8 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -139,6 +147,7 @@
 				204975EE191E1940000324D1 /* MYWHistoryManager.m */,
 				204975F3191E1E15000324D1 /* MYWHistoryCell.h */,
 				204975F4191E1E15000324D1 /* MYWHistoryCell.m */,
+				D9B891AD192376A400D84592 /* icon1024.png */,
 			);
 			path = Mayowazu;
 			sourceTree = "<group>";
@@ -179,9 +188,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 201391E0191DFBC200749FE3 /* Build configuration list for PBXNativeTarget "Mayowazu" */;
 			buildPhases = (
+				0BCE02779F4D4A4CA222B364 /* Check Pods Manifest.lock */,
 				201391AA191DFBC200749FE3 /* Sources */,
 				201391AB191DFBC200749FE3 /* Frameworks */,
 				201391AC191DFBC200749FE3 /* Resources */,
+				1E2F85A7923B47259D5696BE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -252,6 +263,7 @@
 				201391CA191DFBC200749FE3 /* Images.xcassets in Resources */,
 				201391BC191DFBC200749FE3 /* InfoPlist.strings in Resources */,
 				201391C5191DFBC200749FE3 /* Main.storyboard in Resources */,
+				D9B891AE192376A400D84592 /* icon1024.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +276,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0BCE02779F4D4A4CA222B364 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		1E2F85A7923B47259D5696BE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		201391AA191DFBC200749FE3 /* Sources */ = {
@@ -398,6 +443,7 @@
 		};
 		201391E1191DFBC200749FE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58A7E3B5AE754B2BBD2E11E5 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -411,6 +457,7 @@
 		};
 		201391E2191DFBC200749FE3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58A7E3B5AE754B2BBD2E11E5 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
