@@ -30,18 +30,15 @@
 
 
 #import "MYWViewController.h"
-#import "MYWHistoryManager.h"
-#import "MYWShopInfo.h"
+#import "MYWResultViewController.h"
+#import "MYWPopAlertView.h"
+#import <UIAlertView-Blocks/UIAlertView+Blocks.h>
 
 @interface MYWViewController ()
-<UIWebViewDelegate, UIAlertViewDelegate, UITextFieldDelegate>
-
-@property (nonatomic) UIWebView *webView;
+<UITextFieldDelegate, MYWPopAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *siteUrlTextField;
-@property (weak, nonatomic) IBOutlet UITextField *addressTextField;
-@property (weak, nonatomic) IBOutlet UITextField *shopNameField;
-
+@property (weak, nonatomic) IBOutlet MYWPopAlertView *popAlertView;
 
 @end
 
@@ -55,205 +52,84 @@
     // TODO: あとでけす
     _siteUrlTextField.text = @"http://tabelog.com/hyogo/A2805/A280501/28001454/";
     
+    // 最初は隠しておく
+    _popAlertView.delegate = self;
+    self.popAlertView.hidden = YES;
+}
+
+
+- (void)hidePopAlertView {
+    [UIView animateWithDuration:0.2f
+                     animations:^{
+                         self.popAlertView.frame
+                         = CGRectMake(0,
+                                      self.view.bounds.size.height,
+                                      _popAlertView.frame.size.width,
+                                      _popAlertView.frame.size.height);
+                     }
+     completion:^(BOOL finished) {
+         _popAlertView.hidden = YES;
+     }];
+}
+
+- (void)showPopAlertView {
+    self.popAlertView.hidden = NO;
+    self.popAlertView.frame = CGRectMake(0, self.view.bounds.size.height,
+                                         _popAlertView.frame.size.width,
+                                         _popAlertView.frame.size.height);
+    
+    [UIView animateWithDuration:0.3f
+                          delay:0.2f
+                        options:UIViewAnimationOptionCurveEaseIn
+                     animations:^{
+                         self.popAlertView.frame
+                         = CGRectMake(0,
+                                      self.view.bounds.size.height - _popAlertView.frame.size.height,
+                                      _popAlertView.frame.size.width,
+                                      _popAlertView.frame.size.height);
+                     }
+                     completion:^(BOOL finished) {
+                         // completion
+                     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [self checkPasteBoard];
 }
 
 // Pasteboardをチェックして
 - (void)checkPasteBoard {
+    NSString *lastPasteStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"LAST_PASTE_BOARD"];
+    
     UIPasteboard *board = [UIPasteboard generalPasteboard];
     NSString *string = [board valueForPasteboardType:@"public.text"];
-
+    
+    if (lastPasteStr && [lastPasteStr isEqualToString:string]) {
+        // すでに表示したものは表示しない
+        return;
+    }
+    
     // パターンにマッチすれば提案を出す
     NSString *host = [[NSURL URLWithString:string] host];
     if ([host isEqualToString:@"tabelog.com"]
         || [host isEqualToString:@"s.tabelog.com"]
         || [host isEqualToString:@"r.gnavi.co.jp"]) {
         
-        // TODO: bottomからviewが出てくるタイプにする
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"コピーしているURLから検索しますか？"
-                                                        message:string
-                                                       delegate:self
-                                              cancelButtonTitle:@"Cancel"
-                                              otherButtonTitles:@"OK", nil];
-        [alert show];
-    }
-    
-}
-
-- (void)loadWebPageWithUrl:(NSString *)url {
-    // validate
-    if (url == nil || [url isEqualToString:@""]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー"
-                                                        message:@"URLを入力してください"
-                                                       delegate:nil
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"OK", nil];
-        [alert show];
-        return;
-    }
-    
-    if (!_webView) {
-        self.webView = [[UIWebView alloc] init];
-        _webView.delegate = self;
-    }
-    
-    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    [_webView loadRequest:req];
-}
-
-
-#pragma mark - UIWebViewDelegate
-
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
-    _shopNameField.text = title;
-    
-    NSString *host = webView.request.URL.host;
-
-    if ([host isEqualToString:@"tabelog.com"]
-        || [host isEqualToString:@"s.tabelog.com"]) {
-        // エラーハンドリング
-        if ([webView.request.URL.absoluteString isEqualToString:@"http://s.tabelog.com/2800145/"]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"食べログ エラー"
-                                                            message:@"該当するお店を見つけられませんでした。URLが正しいかを確認してください"
-                                                           delegate:nil
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"OK", nil];
-            [alert show];
-            return;
-        }
+        [self showPopAlertView];
         
-        // 食べログなら
-        NSString *address = [self searchAddressForTabelog];
-        _addressTextField.text = address;
-        
-        MYWShopInfo *shopInfo = [[MYWShopInfo alloc] initWithUrl:webView.request.URL.absoluteString
-                                                           title:title
-                                                         address:address];
-        [[[MYWHistoryManager alloc] init] saveToHistory:shopInfo];
+        // saveしておく
+        [[NSUserDefaults standardUserDefaults] setObject:string forKey:@"LAST_PASTE_BOARD"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    else if ([host isEqualToString:@"r.gnavi.co.jp"]
-             || [host isEqualToString:@"mobile.gnavi.co.jp"]) {
-        // エラーハンドリング
-        if ([webView.request.URL.absoluteString isEqualToString:@"http://mobile.gnavi.co.jp/iphone/gnrl/gt-error/"]) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ぐるなび エラー"
-                                                            message:@"該当するお店を見つけられませんでした。URLが正しいかを確認してください"
-                                                           delegate:nil
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"OK", nil];
-            [alert show];
-            return;
-        }
-        
-        // ぐるなびなら
-        NSString *address = [self searchAddressForGurunavi];
-        _addressTextField.text = address;
-        
-        MYWShopInfo *shopInfo = [[MYWShopInfo alloc] initWithUrl:webView.request.URL.absoluteString
-                                                           title:title
-                                                         address:address];
-        [[[MYWHistoryManager alloc] init] saveToHistory:shopInfo];
-    }
-    else {
-        // どちらでもないなら
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"すみません"
-                                                        message:@"住所を検索できません。食べログかぐるなびのURLを入力してください"
-                                                       delegate:nil
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"OK", nil];
-        [alert show];
-    }
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"読み込みエラー[%@]", error);
     
-    if (error.code == 102) {
-        // 読み込めないURL
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー"
-                                                        message:@"有効なURLを入力してください"
-                                                       delegate:nil
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"OK", nil];
-        [alert show];
-    }
-}
-
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex != alertView.cancelButtonIndex) {
-        UIPasteboard *board = [UIPasteboard generalPasteboard];
-        NSString *string = [board valueForPasteboardType:@"public.text"];
-        
-        _siteUrlTextField.text = string;
-        [self loadWebPageWithUrl:_siteUrlTextField.text];
-    }
 }
 
 
 #pragma mark - IBAction
 
 - (IBAction)searchBtnTouched:(id)sender {
-    // キーボードを閉じる
-    [_siteUrlTextField resignFirstResponder];
-    [_shopNameField resignFirstResponder];
-    
-    [self loadWebPageWithUrl:_siteUrlTextField.text];
-}
-
-- (NSString *)getEscapedString {
-    NSString *query = _addressTextField.text;
-    NSString *escapedString = (NSString*)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
-                                                                                                   kCFAllocatorDefault,
-                                                                                                   (CFStringRef)query,
-                                                                                                   NULL,
-                                                                                                   (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                                   kCFStringEncodingUTF8));
-    return escapedString;
-}
-
-- (IBAction)openiOSMapBtnTouched:(id)sender {
-    NSString *url = [NSString stringWithFormat:@"http://maps.apple.com/maps?q=%@", [self getEscapedString]];
-    [self openUrl:url];
-}
-
-- (IBAction)openGoogleMapBtnTouched:(id)sender {
-    NSString *url = [NSString stringWithFormat:@"comgooglemaps://?q=%@", [self getEscapedString]];
-    [self openUrl:url];
-}
-
-- (void)openUrl:(NSString *)url {
-    NSLog(@"open url[%@]", url);
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-}
-
-
-- (NSString *)searchAddressForTabelog {
-    // PCサイト
-    //    NSString *jsStr = @"document.getElementsByClassName('address')[0].getElementsByTagName('p')[0].innerText";
-    
-    // スマホサイト（食べログ）
-    NSString *jsStr = @"document.getElementsByClassName('add data')[0].innerText";
-    
-    return [_webView stringByEvaluatingJavaScriptFromString:jsStr];
-}
-
-
-- (NSString *)searchAddressForGurunavi {
-    // ぐるなび
-    NSString *jsStr = @"document.getElementsByClassName('sh-t-data-tbl')[0].getElementsByTagName('td')[1].innerText";
-    return [_webView stringByEvaluatingJavaScriptFromString:jsStr];
+    [self searchWithQuery];
 }
 
 
@@ -263,10 +139,51 @@
     [textField resignFirstResponder];
     
     if (textField == _siteUrlTextField) {
-        [self loadWebPageWithUrl:_siteUrlTextField.text];
+        [self searchWithQuery];
     }
     return YES;
 }
+
+
+- (void)searchWithQuery {
+    // validate
+    NSString *siteUrl = _siteUrlTextField.text;
+    if (siteUrl == nil || [siteUrl isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー"
+                                                        message:@"URLを入力してください"
+                                                       delegate:nil
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"OK", nil];
+        [alert show];
+        return;
+    }
+    
+    [self performSegueWithIdentifier:@"showResult" sender:siteUrl];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showResult"]) {
+        MYWResultViewController *vc = (MYWResultViewController *)segue.destinationViewController;
+        vc.searchQuery = (NSString *)sender;
+    }
+}
+
+
+#pragma mark - MYWPopAlertViewDelegate
+
+- (void)didTapOKBtn {
+    UIPasteboard *board = [UIPasteboard generalPasteboard];
+    NSString *string = [board valueForPasteboardType:@"public.text"];
+    
+    _siteUrlTextField.text = string;
+    [self searchWithQuery];
+}
+
+
+- (void)didTapCancelBtn {
+    [self hidePopAlertView];
+}
+
 
 
 @end

@@ -10,6 +10,7 @@
 #import "MYWHistoryManager.h"
 #import "MYWHistoryCell.h"
 #import "MYWShopInfo.h"
+#import <UIAlertView-Blocks/UIActionSheet+Blocks.h>
 
 @interface MYWHistoryViewController ()
 <UITableViewDataSource, UITableViewDelegate,
@@ -69,9 +70,20 @@ MYWHistoryCellDelegate>
 
 #pragma mark - MYWHistoryCellDelegate
 
+- (NSString *)getEscapedString:(NSString *)originStr {
+    NSString *query = originStr;
+    NSString *escapedString = (NSString*)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+                                                                                                   kCFAllocatorDefault,
+                                                                                                   (CFStringRef)query,
+                                                                                                   NULL,
+                                                                                                   (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                                   kCFStringEncodingUTF8));
+    return escapedString;
+}
+
 - (void)didTapMapBtn:(NSString *)address {
     // TODO: action sheetでアプリを選べるように
-    NSString *url = [NSString stringWithFormat:@"http://maps.apple.com/maps?q=%@", address];
+    NSString *url = [NSString stringWithFormat:@"http://maps.apple.com/maps?q=%@", [self getEscapedString:address]];
     [self openUrl:url];
 }
 
@@ -79,6 +91,27 @@ MYWHistoryCellDelegate>
     NSLog(@"open url[%@]", url);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
+
+
+- (IBAction)clearAllButtonTouched:(id)sender {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"履歴をすべて削除しますか？"
+                                               cancelButtonItem:[RIButtonItem itemWithLabel:@"キャンセル"]
+                                          destructiveButtonItem:nil
+                                               otherButtonItems:
+                            [RIButtonItem itemWithLabel:@"はい"
+                                                 action:^{
+                                                     // clear all
+                                                     MYWHistoryManager *manager =  [[MYWHistoryManager alloc] init];
+                                                     [manager clearAll];
+                                                     
+                                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                                         [self reload];
+                                                     });
+                                                     
+                                                 }], nil];
+    [sheet showInView:self.view];
+}
+
 
 
 @end

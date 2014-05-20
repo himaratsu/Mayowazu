@@ -49,11 +49,16 @@
 
 - (void)saveToHistory:(MYWShopInfo *)shopInfo {
     // 重複を許さない
-    if ([_historys containsObject:shopInfo]) {
+    if ([self.historys containsObject:shopInfo]) {
         [_historys removeObject:shopInfo];
     }
     
     [self.historys addObject:shopInfo];
+    [self saveHistorys];
+}
+
+- (void)clearAll {
+    self.historys = [NSMutableArray array];
     [self saveHistorys];
 }
 

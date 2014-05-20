@@ -14,5 +14,6 @@
 
 - (NSMutableArray *)historys;
 - (void)saveToHistory:(MYWShopInfo *)shopInfo;
+- (void)clearAll;
 
 @end

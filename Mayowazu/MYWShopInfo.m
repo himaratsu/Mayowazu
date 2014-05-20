@@ -36,4 +36,26 @@
     [aCoder encodeObject:_address forKey:@"SHOP_ADDRESS"];
 }
 
+
+- (BOOL)isEqual:(id)object {
+    if (object == self)
+        return YES;
+    if (!object || ![object isKindOfClass:[self class]])
+        return NO;
+    return [self isEqualToShopInfo:object];
+}
+
+- (BOOL)isEqualToShopInfo:(MYWShopInfo *)aShopInfo {
+    if (self == aShopInfo)
+        return YES;
+    if (![[self url] isEqualToString:[aShopInfo url]])
+        return NO;
+    if (![[self title] isEqualToString:[aShopInfo title]])
+        return NO;
+    if (![[self address] isEqualToString:[aShopInfo address]])
+        return NO;
+    return YES;
+}
+
+
 @end

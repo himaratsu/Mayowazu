@@ -26,6 +26,9 @@
 		204975F2191E1D1C000324D1 /* MYWHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 204975F1191E1D1C000324D1 /* MYWHistoryViewController.m */; };
 		204975F5191E1E15000324D1 /* MYWHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204975F4191E1E15000324D1 /* MYWHistoryCell.m */; };
 		8AB303E812C645949BB6242E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1961A229F3E4300A551BBD8 /* libPods.a */; };
+		D9502E48192B05B2006B60DB /* MYWResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9502E47192B05B2006B60DB /* MYWResultViewController.m */; };
+		D98BC0BF192B5107000F945F /* MYWPopAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = D98BC0BE192B5107000F945F /* MYWPopAlertView.m */; };
+		D98BC0C1192B5115000F945F /* MYWPopAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D98BC0C0192B5115000F945F /* MYWPopAlertView.xib */; };
 		D9B891AE192376A400D84592 /* icon1024.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B891AD192376A400D84592 /* icon1024.png */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +71,11 @@
 		204975F3191E1E15000324D1 /* MYWHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYWHistoryCell.h; sourceTree = "<group>"; };
 		204975F4191E1E15000324D1 /* MYWHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYWHistoryCell.m; sourceTree = "<group>"; };
 		58A7E3B5AE754B2BBD2E11E5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		D9502E46192B05B2006B60DB /* MYWResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYWResultViewController.h; sourceTree = "<group>"; };
+		D9502E47192B05B2006B60DB /* MYWResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYWResultViewController.m; sourceTree = "<group>"; };
+		D98BC0BD192B5107000F945F /* MYWPopAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MYWPopAlertView.h; sourceTree = "<group>"; };
+		D98BC0BE192B5107000F945F /* MYWPopAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MYWPopAlertView.m; sourceTree = "<group>"; };
+		D98BC0C0192B5115000F945F /* MYWPopAlertView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MYWPopAlertView.xib; sourceTree = "<group>"; };
 		D9B891AD192376A400D84592 /* icon1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon1024.png; sourceTree = "<group>"; };
 		E1961A229F3E4300A551BBD8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -137,6 +145,8 @@
 				201391C3191DFBC200749FE3 /* Main.storyboard */,
 				201391C6191DFBC200749FE3 /* MYWViewController.h */,
 				201391C7191DFBC200749FE3 /* MYWViewController.m */,
+				D9502E46192B05B2006B60DB /* MYWResultViewController.h */,
+				D9502E47192B05B2006B60DB /* MYWResultViewController.m */,
 				204975F0191E1D1C000324D1 /* MYWHistoryViewController.h */,
 				204975F1191E1D1C000324D1 /* MYWHistoryViewController.m */,
 				201391C9191DFBC200749FE3 /* Images.xcassets */,
@@ -147,6 +157,9 @@
 				204975EE191E1940000324D1 /* MYWHistoryManager.m */,
 				204975F3191E1E15000324D1 /* MYWHistoryCell.h */,
 				204975F4191E1E15000324D1 /* MYWHistoryCell.m */,
+				D98BC0BD192B5107000F945F /* MYWPopAlertView.h */,
+				D98BC0BE192B5107000F945F /* MYWPopAlertView.m */,
+				D98BC0C0192B5115000F945F /* MYWPopAlertView.xib */,
 				D9B891AD192376A400D84592 /* icon1024.png */,
 			);
 			path = Mayowazu;
@@ -264,6 +277,7 @@
 				201391BC191DFBC200749FE3 /* InfoPlist.strings in Resources */,
 				201391C5191DFBC200749FE3 /* Main.storyboard in Resources */,
 				D9B891AE192376A400D84592 /* icon1024.png in Resources */,
+				D98BC0C1192B5115000F945F /* MYWPopAlertView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,6 +329,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D98BC0BF192B5107000F945F /* MYWPopAlertView.m in Sources */,
 				201391C2191DFBC200749FE3 /* MYWAppDelegate.m in Sources */,
 				201391C8191DFBC200749FE3 /* MYWViewController.m in Sources */,
 				204975F5191E1E15000324D1 /* MYWHistoryCell.m in Sources */,
@@ -322,6 +337,7 @@
 				204975F2191E1D1C000324D1 /* MYWHistoryViewController.m in Sources */,
 				204975EC191E18B9000324D1 /* MYWShopInfo.m in Sources */,
 				204975EF191E1940000324D1 /* MYWHistoryManager.m in Sources */,
+				D9502E48192B05B2006B60DB /* MYWResultViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
