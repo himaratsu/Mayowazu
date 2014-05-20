@@ -38,6 +38,9 @@
 <UITextFieldDelegate, MYWPopAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *siteUrlTextField;
+@property (weak, nonatomic) IBOutlet UIView *howToBorderView;
+
+
 @end
 
 
@@ -49,6 +52,10 @@
 	
     // TODO: あとでけす
     _siteUrlTextField.text = @"http://tabelog.com/hyogo/A2805/A280501/28001454/";
+    
+    _howToBorderView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    _howToBorderView.layer.borderWidth = 1.0f;
+    _howToBorderView.layer.cornerRadius = 8.0f;
 
 }
 
