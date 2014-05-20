@@ -38,8 +38,6 @@
 <UITextFieldDelegate, MYWPopAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *siteUrlTextField;
-@property (weak, nonatomic) IBOutlet MYWPopAlertView *popAlertView;
-
 @end
 
 
@@ -51,46 +49,7 @@
 	
     // TODO: あとでけす
     _siteUrlTextField.text = @"http://tabelog.com/hyogo/A2805/A280501/28001454/";
-    
-    // 最初は隠しておく
-    _popAlertView.delegate = self;
-    self.popAlertView.hidden = YES;
-}
 
-
-- (void)hidePopAlertView {
-    [UIView animateWithDuration:0.2f
-                     animations:^{
-                         self.popAlertView.frame
-                         = CGRectMake(0,
-                                      self.view.bounds.size.height,
-                                      _popAlertView.frame.size.width,
-                                      _popAlertView.frame.size.height);
-                     }
-     completion:^(BOOL finished) {
-         _popAlertView.hidden = YES;
-     }];
-}
-
-- (void)showPopAlertView {
-    self.popAlertView.hidden = NO;
-    self.popAlertView.frame = CGRectMake(0, self.view.bounds.size.height,
-                                         _popAlertView.frame.size.width,
-                                         _popAlertView.frame.size.height);
-    
-    [UIView animateWithDuration:0.3f
-                          delay:0.2f
-                        options:UIViewAnimationOptionCurveEaseIn
-                     animations:^{
-                         self.popAlertView.frame
-                         = CGRectMake(0,
-                                      self.view.bounds.size.height - _popAlertView.frame.size.height,
-                                      _popAlertView.frame.size.width,
-                                      _popAlertView.frame.size.height);
-                     }
-                     completion:^(BOOL finished) {
-                         // completion
-                     }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -116,7 +75,15 @@
         || [host isEqualToString:@"s.tabelog.com"]
         || [host isEqualToString:@"r.gnavi.co.jp"]) {
         
-        [self showPopAlertView];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"コピーしているURLがあります"
+                                                        message:string
+                                               cancelButtonItem:[RIButtonItem itemWithLabel:@"キャンセル"]
+                                               otherButtonItems:[RIButtonItem itemWithLabel:@"このURLを検索"
+                                                                                     action:^{
+                                                                                         _siteUrlTextField.text = string;
+                                                                                         [self searchWithQuery];
+                                                                                     }], nil];
+        [alert show];
         
         // saveしておく
         [[NSUserDefaults standardUserDefaults] setObject:string forKey:@"LAST_PASTE_BOARD"];
@@ -166,22 +133,6 @@
         MYWResultViewController *vc = (MYWResultViewController *)segue.destinationViewController;
         vc.searchQuery = (NSString *)sender;
     }
-}
-
-
-#pragma mark - MYWPopAlertViewDelegate
-
-- (void)didTapOKBtn {
-    UIPasteboard *board = [UIPasteboard generalPasteboard];
-    NSString *string = [board valueForPasteboardType:@"public.text"];
-    
-    _siteUrlTextField.text = string;
-    [self searchWithQuery];
-}
-
-
-- (void)didTapCancelBtn {
-    [self hidePopAlertView];
 }
 
 
