@@ -57,7 +57,6 @@ static NSString * const kGoogleMapStoreUrl = @"https://itunes.apple.com/jp/app/g
 }
 
 - (void)screenEdgeGesture:(id)tapGesture {
-    NSLog(@"tap_gesture[%@]", tapGesture);
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -181,6 +180,18 @@ static NSString * const kGoogleMapStoreUrl = @"https://itunes.apple.com/jp/app/g
         [alert show];
         
     }
+    
+    // いずれかが空なら
+    if ([_addressTextField.text isEqualToString:@""]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー"
+                                                        message:@"住所を検索できません。URL中に住所が含まれているかを確認してください"
+                                               cancelButtonItem:nil
+                                               otherButtonItems:[RIButtonItem itemWithLabel:@"OK" action:^{
+            [self.navigationController popViewControllerAnimated:YES];
+        }], nil];
+        [alert show];
+    }
+    
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {

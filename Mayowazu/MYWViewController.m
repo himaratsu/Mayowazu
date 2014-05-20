@@ -49,13 +49,27 @@
 {
     [super viewDidLoad];
 	
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(checkPasteBoard)
+                                                 name:UIApplicationDidBecomeActiveNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(checkPasteBoard)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+    
     // TODO: あとでけす
-    _siteUrlTextField.text = @"http://tabelog.com/hyogo/A2805/A280501/28001454/";
+    _siteUrlTextField.text = @"http://s.tabelog.com/tokyo/A1307/A130701/13045423/";
     
     _howToBorderView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     _howToBorderView.layer.borderWidth = 1.0f;
     _howToBorderView.layer.cornerRadius = 8.0f;
 
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

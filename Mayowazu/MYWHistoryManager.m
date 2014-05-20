@@ -48,6 +48,14 @@
 }
 
 - (void)saveToHistory:(MYWShopInfo *)shopInfo {
+    if (shopInfo
+        && (shopInfo.url && ![shopInfo.url isEqualToString:@""])
+        && (shopInfo.title && ![shopInfo.title isEqualToString:@""])
+        && (shopInfo.address && ![shopInfo.address isEqualToString:@""])
+        ) {
+        NSLog(@"値が不正のため保存できませんでした");
+        return;
+    }
     // 重複を許さない
     if ([self.historys containsObject:shopInfo]) {
         [_historys removeObject:shopInfo];
