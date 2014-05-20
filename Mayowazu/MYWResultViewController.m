@@ -9,7 +9,9 @@
 #import "MYWResultViewController.h"
 #import "MYWShopInfo.h"
 #import "MYWHistoryManager.h"
+#import "MYWWebViewController.h"
 #import <UIAlertView-Blocks/UIAlertView+Blocks.h>
+#import <UIAlertView-Blocks/UIActionSheet+Blocks.h>
 
 @interface MYWResultViewController ()
 <UIWebViewDelegate>
@@ -279,5 +281,40 @@ static NSString * const kGoogleMapStoreUrl = @"https://itunes.apple.com/jp/app/g
 }
 
 
+- (IBAction)actionBtnTouched:(id)sender {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"アクションを選択してください" cancelButtonItem:[RIButtonItem itemWithLabel:@"キャンセル"]
+                                          destructiveButtonItem:nil
+                                               otherButtonItems:[RIButtonItem itemWithLabel:@"URLを開く"
+                                                                                     action:^{
+                                                                                         // open URL
+                                                                                         [self performSegueWithIdentifier:@"showWeb" sender:nil];
+                                                                                     }],
+                            [RIButtonItem itemWithLabel:@"URLをコピー"
+                                                 action:^{
+                                                     // copy URL
+                                                     [self copyUrlStr];
+                                                 }], nil];
+    [sheet showInView:self.view];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showWeb"]) {
+        MYWWebViewController *webVC = segue.destinationViewController;
+        webVC.urlStr = self.title;
+    }
+}
+
+
+- (void)copyUrlStr {
+    UIPasteboard *pastebd = [UIPasteboard generalPasteboard];
+    [pastebd setValue:self.title forPasteboardType: @"public.utf8-plain-text"];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"URLをコピーしました"
+                                                    message:self.title delegate:nil
+                                          cancelButtonTitle:nil
+                                          otherButtonTitles:@"OK", nil];
+    [alert show];
+}
 
 @end

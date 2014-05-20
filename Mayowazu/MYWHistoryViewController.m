@@ -10,6 +10,7 @@
 #import "MYWHistoryManager.h"
 #import "MYWHistoryCell.h"
 #import "MYWShopInfo.h"
+#import "MYWWebViewController.h"
 #import <UIAlertView-Blocks/UIActionSheet+Blocks.h>
 
 @interface MYWHistoryViewController ()
@@ -52,21 +53,43 @@ MYWHistoryCellDelegate>
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_historys count];
+    return MAX([_historys count], 1);
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellIdentifier;
+    if ([_historys count] == 0) {
+        cellIdentifier = @"NoCell";
+    }
+    else {
+        cellIdentifier = @"Cell";
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    return cell.frame.size.height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([_historys count] == 0) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"NoCell"];
+        return cell;
+    }
+    
     MYWHistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     MYWShopInfo *shopInfo = _historys[indexPath.row];
     
     cell.delegate = self;
+    cell.shopInfo = shopInfo;
     cell.shopNameLabel.text = shopInfo.title;
     cell.addressLabel.text = shopInfo.address;
     
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
 
 #pragma mark - MYWHistoryCellDelegate
 
@@ -112,6 +135,15 @@ MYWHistoryCellDelegate>
     [sheet showInView:self.view];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showWeb"]) {
+        MYWHistoryCell *cell = (MYWHistoryCell *)sender;
+        MYWShopInfo *shopInfo = cell.shopInfo;
+        
+        MYWWebViewController *webVC = segue.destinationViewController;
+        webVC.urlStr = shopInfo.url;
+    }
+}
 
 
 @end

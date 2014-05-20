@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MYWShopInfo.h"
 
 @protocol MYWHistoryCellDelegate <NSObject>
 
@@ -16,6 +17,8 @@
 
 
 @interface MYWHistoryCell : UITableViewCell
+
+@property (nonatomic) MYWShopInfo *shopInfo;
 
 @property (nonatomic, assign) id<MYWHistoryCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UILabel *shopNameLabel;

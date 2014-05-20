@@ -31,11 +31,10 @@
 
 #import "MYWViewController.h"
 #import "MYWResultViewController.h"
-#import "MYWPopAlertView.h"
 #import <UIAlertView-Blocks/UIAlertView+Blocks.h>
 
 @interface MYWViewController ()
-<UITextFieldDelegate, MYWPopAlertViewDelegate>
+<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *siteUrlTextField;
 @property (weak, nonatomic) IBOutlet UIView *howToBorderView;
