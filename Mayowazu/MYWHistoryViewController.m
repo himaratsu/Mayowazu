@@ -111,7 +111,6 @@ MYWHistoryCellDelegate>
 }
 
 - (void)openUrl:(NSString *)url {
-    NSLog(@"open url[%@]", url);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 

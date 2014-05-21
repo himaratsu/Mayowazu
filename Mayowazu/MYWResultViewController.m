@@ -194,9 +194,7 @@ static NSString * const kGoogleMapStoreUrl = @"https://itunes.apple.com/jp/app/g
     
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"読み込みエラー[%@]", error);
-    
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {    
     if (error.code == 101 || error.code == 102) {
         // 読み込めないURL
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"エラー"
@@ -269,7 +267,6 @@ static NSString * const kGoogleMapStoreUrl = @"https://itunes.apple.com/jp/app/g
 }
 
 - (void)openUrl:(NSString *)url {
-    NSLog(@"open url[%@]", url);
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
 }
 
